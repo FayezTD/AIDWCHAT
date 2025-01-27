@@ -1,3 +1,4 @@
+from flask import Flask, jsonify, request
 import chainlit as cl
 import urllib.request
 import json
@@ -8,6 +9,11 @@ import logging
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_exponential
 import re
+from flask_cors import CORS
+
+# Create Flask application instance
+app = Flask(__name__)
+CORS(app)
 
 # Load environment variables
 load_dotenv()
@@ -40,19 +46,11 @@ def configure_azure_endpoint():
 
 # Function to clean up and format the response
 def clean_and_format_response(raw_response):
-    # Remove HTML tags
     cleaned_response = re.sub(r'<.*?>', '', raw_response)
-    
-    # Replace <br> tags with actual newlines
     cleaned_response = re.sub(r'<br\s*/?>', '\n', cleaned_response)
-    
-    # Replace any special character issues (like \n within words) with actual spaces or newlines
-    cleaned_response = re.sub(r'\n+', '\n', cleaned_response)  # Multiple newlines into one
-    cleaned_response = re.sub(r'\s{2,}', ' ', cleaned_response)  # Multiple spaces into one
-    
-    # Strip any leading or trailing whitespace
+    cleaned_response = re.sub(r'\n+', '\n', cleaned_response)
+    cleaned_response = re.sub(r'\s{2,}', ' ', cleaned_response)
     cleaned_response = cleaned_response.strip()
-    
     return cleaned_response
 
 # Function to query the Azure endpoint with retry logic
@@ -71,7 +69,6 @@ async def query_azure_endpoint(message_content, chat_history=None):
 
     headers = {
         'Content-Type': 'application/json',
-        
         'Authorization': f'Bearer {endpoint_config["api_key"]}'
     }
 
@@ -100,6 +97,7 @@ async def query_azure_endpoint(message_content, chat_history=None):
     except Exception as e:
         raise AzureEndpointError(f"Unexpected error: {str(e)}")
 
+# Chainlit event handlers
 @cl.on_chat_start
 async def on_chat_start():
     try:
@@ -206,3 +204,11 @@ async def on_chat_end():
         ).send()
     except Exception as e:
         logger.error(f"Error in chat end handler: {str(e)}")
+
+# Flask routes
+@app.route('/')
+def index():
+    return "AI Assistant is running"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
