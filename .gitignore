@@ -1,0 +1,52 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+*.env
+
+# Pytest cache
+.cache/
+
+# IDE/editor directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Log files
+*.log
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Docker
+Dockerfile*
+docker-compose.yml
+
+# Azure related
+*.azure
+*.azure/config/
+*.azure/*.json
+
+# OS-specific files (macOS, Windows, etc.)
+.DS_Store
+Thumbs.db
+
+# Chainlit specific
+chainlit_output/
+*.db

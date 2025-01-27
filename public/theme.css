@@ -1,0 +1,32 @@
+.message-content {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.8; /* Increased line height for better readability */
+    padding: 12px 18px; /* Adjust padding for better spacing */
+    border-radius: 15px;
+    max-width: 80%;
+    word-wrap: break-word;
+    background-color: #fff; /* White background for all messages */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for a cleaner look */
+    word-break: break-word; /* Ensure long words break and don't overflow */
+    white-space: pre-wrap; /* Maintain line breaks and spaces */
+}
+
+.user-message {
+    background-color: #e1f5fe;
+    align-self: flex-end;
+    border-radius: 15px 15px 0 15px; /* Rounded corners on the bottom-left */
+    margin-left: auto; /* Ensures the user message aligns to the right */
+}
+
+.bot-message {
+    background-color: #f5f5f5;
+    align-self: flex-start;
+    border-radius: 15px 15px 15px 0; /* Rounded corners on the bottom-right */
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Increased gap between messages for better spacing */
+    margin: 10px 0;
+}
