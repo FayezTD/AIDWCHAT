@@ -1,11 +1,9 @@
-# Welcome to AI Support Assistant! 👋
+# Welcome to AIDW Assistant
 
-This chatbot can help you with:
-- General Inquiries
-- Product Information
-- Customer Support
-- Technical Support
-- Account Management
-- Billing and Payments
+Ask questions about AIDW data and get detailed insights.
 
-Select a category to get started!
+## Features
+- Analyze AIDW performance metrics
+- View partnership information
+- Understand technical implementations
+- Track business impact
