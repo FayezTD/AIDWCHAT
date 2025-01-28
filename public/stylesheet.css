@@ -1,0 +1,71 @@
+/* .chainlit/public/style.css */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --background-color: #0f172a;
+    --text-color: #f8fafc;
+}
+
+/* Message container styling */
+.cl-message-container {
+    max-width: 800px !important;
+    margin: 0 auto !important;
+    padding: 1rem !important;
+}
+
+/* Message styling */
+.cl-message {
+    background-color: rgba(37, 99, 235, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    margin: 8px 0 !important;
+}
+
+/* User message specific styling */
+.cl-message-user {
+    background-color: rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Assistant message specific styling */
+.cl-message-assistant {
+    background-color: rgba(30, 64, 175, 0.1) !important;
+}
+
+/* Input box styling */
+.cl-chat-input {
+    background-color: rgba(37, 99, 235, 0.1) !important;
+    border: 1px solid var(--primary-color) !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+}
+
+.cl-chat-input:focus {
+    outline: none !important;
+    border-color: var(--secondary-color) !important;
+}
+
+/* Button styling */
+.cl-action-button {
+    background-color: var(--primary-color) !important;
+    color: var(--text-color) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 8px 16px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.cl-action-button:hover {
+    background-color: var(--secondary-color) !important;
+}
+
+/* Header styling */
+.cl-header {
+    background-color: var(--background-color) !important;
+    border-bottom: 1px solid var(--primary-color) !important;
+}
+
+/* Logo styling */
+.cl-header-logo {
+    max-height: 40px !important;
+}
