@@ -36,11 +36,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Microsoft Azure AD Configuration
-CLIENT_ID = os.getenv("OAUTH_CLIENT_ID", "4bfb95dc-d50c-47a5-bc82-c1899c60a199")
-CLIENT_SECRET = os.getenv("OAUTH_CLIENT_SECRET", "WuK8Q~ePCKu36xjd-..XcLb-AbgHW~DZMt8IcbsZ")
-TENANT_ID = os.getenv("OAUTH_TENANT_ID", "3d7a3f90-1d2c-4d91-9b49-52e098cf9eb8")
+# Microsoft Azure AD Configuration
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+TENANT_ID = os.getenv("TENANT_ID")
 AUTHORITY = f"https://login.microsoftonline.com/{TENANT_ID}"
-REDIRECT_PATH = "/auth/callback/2Rv37eu9QWC"
+REDIRECT_PATH = os.getenv("REDIRECT_PATH")
 SCOPE = ["User.Read"]
 SESSION = {}
 
