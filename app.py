@@ -1,7 +1,6 @@
 import urllib.request
 import json
 import os
-import ssl
 import logging
 import asyncio
 from typing import Dict, Any, List, Optional
@@ -9,16 +8,12 @@ import chainlit as cl
 import re
 from datetime import datetime
 from dotenv import load_dotenv
-import plotly.graph_objects as go
-import matplotlib.pyplot as plt
-import io
 import base64
 from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse, HTMLResponse
 import msal
 import secrets
 import hashlib
-from dataclasses import dataclass
 
 # Load environment variables
 load_dotenv()
