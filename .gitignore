@@ -50,3 +50,11 @@ Thumbs.db
 # Chainlit specific
 chainlit_output/
 *.db
+
+# .gitignore
+.env
+flask_session_data/
+__pycache__/
+*.pyc
+*.log
+.vscode/

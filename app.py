@@ -19,7 +19,6 @@ import msal
 import secrets
 import hashlib
 from dataclasses import dataclass
-from typing import Dict, Optional
 
 # Load environment variables
 load_dotenv()
