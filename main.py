@@ -5,10 +5,13 @@ import os
 import base64
 import hashlib
 import secrets
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = FastAPI()
 
-# Microsoft Azure AD Configuration
 # Microsoft Azure AD Configuration
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
@@ -36,13 +39,13 @@ async def root():
     SESSION['code_verifier'] = code_verifier
     auth_url = msal_app.get_authorization_request_url(
         SCOPE,
-        redirect_uri=f"http://localhost:8000{REDIRECT_PATH}",
+        redirect_uri=f"https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net{REDIRECT_PATH}",
         code_challenge=code_challenge,
         code_challenge_method='S256'
     )
     return RedirectResponse(url=auth_url)
 
-@app.get(REDIRECT_PATH) 
+@app.get(REDIRECT_PATH)
 async def authorized(request: Request):
     code = request.query_params.get('code')
     code_verifier = SESSION.pop('code_verifier', None)
@@ -52,17 +55,19 @@ async def authorized(request: Request):
     result = msal_app.acquire_token_by_authorization_code(
         code,
         scopes=SCOPE,
-        redirect_uri=f"http://localhost:8001{REDIRECT_PATH}",  # Changed to 8001
+        redirect_uri=f"https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net{REDIRECT_PATH}",
         code_verifier=code_verifier
     )
     if "access_token" in result:
-        return RedirectResponse(url="http://localhost:8000")  # Redirect to Chainlit server
+        SESSION['user_email'] = result.get('id_token_claims', {}).get('preferred_username', 'Unknown')
+        return RedirectResponse(url="https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net")
     return {"error": "Authentication failed"}
 
 @app.get("/chainlit")
 async def chainlit():
-    return HTMLResponse('<meta http-equiv="refresh" content="0;url=http://localhost:8000/">')
+    user_email = SESSION.get('user_email', 'Unknown')
+    return HTMLResponse(f'<meta http-equiv="refresh" content="0;url=https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net/">')
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="localhost", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8001)

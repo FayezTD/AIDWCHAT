@@ -36,7 +36,6 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Microsoft Azure AD Configuration
-# Microsoft Azure AD Configuration
 CLIENT_ID = os.getenv("CLIENT_ID")
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 TENANT_ID = os.getenv("TENANT_ID")
@@ -258,7 +257,7 @@ async def root():
     SESSION['code_verifier'] = code_verifier
     auth_url = msal_app.get_authorization_request_url(
         SCOPE,
-        redirect_uri=f"http://localhost:8001{REDIRECT_PATH}",
+        redirect_uri=f"https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net{REDIRECT_PATH}",
         code_challenge=code_challenge,
         code_challenge_method='S256'
     )
@@ -274,20 +273,20 @@ async def authorized(request: Request):
     result = msal_app.acquire_token_by_authorization_code(
         code,
         scopes=SCOPE,
-        redirect_uri=f"http://localhost:8001{REDIRECT_PATH}",
+        redirect_uri=f"https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net{REDIRECT_PATH}",
         code_verifier=code_verifier
     )
     
     if "access_token" in result:
         SESSION['user_email'] = result.get('id_token_claims', {}).get('preferred_username', 'Unknown')
-        return RedirectResponse(url="http://localhost:8000")
+        return RedirectResponse(url="https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net")
     return {"error": "Authentication failed"}
 
 @app.get("/chainlit")
 async def chainlit():
     user_email = SESSION.get('user_email', 'Unknown')
     await cl.Message(content=f"👋 **Welcome, {user_email}!**").send()
-    return HTMLResponse('<meta http-equiv="refresh" content="0;url=http://localhost:8000/">')
+    return HTMLResponse('<meta http-equiv="refresh" content="0;url=https://aidw-assistant-dmdjargjhvh3dqez.eastus2-01.azurewebsites.net/">')
 
 # Chainlit event handlers
 @cl.on_chat_start
@@ -369,4 +368,4 @@ def generate_pkce_pair():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="localhost", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8001)
