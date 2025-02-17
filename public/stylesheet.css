@@ -69,3 +69,31 @@
 .cl-header-logo {
     max-height: 40px !important;
 }
+
+/* Action buttons styling */
+.cl-action-button {
+    margin: 4px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Settings panel styling */
+.cl-settings-panel {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Message bubbles */
+.cl-message-user {
+    background-color: #e3f2fd;
+    border-radius: 15px 15px 0 15px;
+}
+
+.cl-message-assistant {
+    background-color: #f5f5f5;
+    border-radius: 15px 15px 15px 0;
+}
