@@ -35,6 +35,8 @@ CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 TENANT_ID = os.getenv("TENANT_ID")
 AUTHORITY = f"https://login.microsoftonline.com/{TENANT_ID}"
 REDIRECT_PATH = os.getenv("REDIRECT_PATH")
+if REDIRECT_PATH is None:
+    raise ValueError("REDIRECT_PATH environment variable is not set")
 SCOPE = ["User.Read"]
 SESSION = {}
 
